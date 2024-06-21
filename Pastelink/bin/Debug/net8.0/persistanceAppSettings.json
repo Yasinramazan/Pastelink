@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "MSSql": "Server=DESKTOP-BLKHRDR\\SQLEXPRESS;Database=Pastelink;User Id=sa;Password=1; TrustServerCertificate=True"
+
+  }
+}

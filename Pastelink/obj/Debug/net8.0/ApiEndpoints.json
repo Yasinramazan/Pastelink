@@ -1,0 +1,162 @@
+[
+  {
+    "ContainingType": "Pastelink.Controllers.PasteController",
+    "Method": "CreatePaste",
+    "RelativePath": "api/Paste/CreatePaste",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Command.PasteCommand.CreatePasteCommand.CreatePasteCommandRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pastelink.Controllers.PasteController",
+    "Method": "DeletePaste",
+    "RelativePath": "api/Paste/DeletePaste",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Command.PasteCommand.DeletePasteCommand.DeletePasteCommandRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pastelink.Controllers.PasteController",
+    "Method": "GetIdPaste",
+    "RelativePath": "api/Paste/GetPaste",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Command.PasteQuery.GetPastebyIdQuery.GetPasteByIdQueryRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pastelink.Controllers.PasteController",
+    "Method": "GetPastes",
+    "RelativePath": "api/Paste/GetPastes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Command.PasteQuery.GetAllPastesQuery.GetAllPastesQueryRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pastelink.Controllers.PasteController",
+    "Method": "LockPaste",
+    "RelativePath": "api/Paste/LockPaste",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Command.PasteCommand.UpdatePasteCommand.UpdatePasteCommandRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pastelink.Controllers.PasteController",
+    "Method": "UpdatePaste",
+    "RelativePath": "api/Paste/UpdatePaste",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Command.PasteCommand.UpdatePasteCommand.UpdatePasteCommandRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pastelink.Controllers.UsersController",
+    "Method": "ChangeUserPassword",
+    "RelativePath": "api/Users/ChangeUserPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Command.AppUserCommand.ChangePasswordCommand.ChangeAppUserPasswordRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pastelink.Controllers.UsersController",
+    "Method": "LoginUser",
+    "RelativePath": "api/Users/LoginUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Command.AppUserCommand.LoginUser.LoginUserRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pastelink.Controllers.UsersController",
+    "Method": "LogoutUser",
+    "RelativePath": "api/Users/LogoutUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Command.AppUserCommand.LogOutUser.LogoutUserRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pastelink.Controllers.UsersController",
+    "Method": "CreateUser",
+    "RelativePath": "api/Users/SignUpUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Command.AppUserCommand.CreateAppUser.CreateAppUserRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
