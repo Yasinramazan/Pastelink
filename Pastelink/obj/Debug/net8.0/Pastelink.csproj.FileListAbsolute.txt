@@ -181,3 +181,4 @@ C:\Users\yasin\source\repos\Pastelink\Pastelink\bin\Debug\net8.0\Serilog.Setting
 C:\Users\yasin\source\repos\Pastelink\Pastelink\bin\Debug\net8.0\Serilog.Sinks.Console.dll
 C:\Users\yasin\source\repos\Pastelink\Pastelink\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
 C:\Users\yasin\source\repos\Pastelink\Pastelink\bin\Debug\net8.0\Serilog.Sinks.File.dll
+C:\Users\yasin\source\repos\Pastelink\Pastelink\obj\Debug\net8.0\Pastelink.sourcelink.json

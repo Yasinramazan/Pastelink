@@ -6,6 +6,8 @@ using AutoMapper;
 using Domain.Entities.Identity;
 using Domain.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -22,6 +24,8 @@ namespace Application.Features.Command.AppUserCommand.LoginUser
         private IHttpContextAccessor _httpContextAccessor;
         private UserManager<AppUser> _userManager;
         private SignInManager<AppUser> _signInManager;
+        
+
         private readonly IMapper _mapper;
         private ITokenHandler _tokenHandler;
 
@@ -47,7 +51,6 @@ namespace Application.Features.Command.AppUserCommand.LoginUser
 
             if(result.Succeeded)
             {
-
                 Token token = _tokenHandler.CreateAccessToken(user);
                
                 return new LoginUserResponse()

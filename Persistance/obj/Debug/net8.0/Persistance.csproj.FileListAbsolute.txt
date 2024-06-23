@@ -15,3 +15,4 @@ C:\Users\yasin\source\repos\Pastelink\Persistance\obj\Debug\net8.0\refint\Persis
 C:\Users\yasin\source\repos\Pastelink\Persistance\obj\Debug\net8.0\Persistance.pdb
 C:\Users\yasin\source\repos\Pastelink\Persistance\obj\Debug\net8.0\Persistance.genruntimeconfig.cache
 C:\Users\yasin\source\repos\Pastelink\Persistance\obj\Debug\net8.0\ref\Persistance.dll
+C:\Users\yasin\source\repos\Pastelink\Persistance\obj\Debug\net8.0\Persistance.sourcelink.json

@@ -22,14 +22,16 @@ namespace Application.Features.Command.PasteCommand.CreatePasteCommand
     {
         private readonly IHttpContextAccessor _contextAccessor;
         UserManager<AppUser> _userManager;
+        private SignInManager<AppUser> _signInManager;
         IPasteWriteRepository _pasteWriteRepository;
         IMapper _mapper;
-        public CreatePasteCommandHandler(IPasteWriteRepository pasteWriteRepository, IMapper mapper, UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public CreatePasteCommandHandler(IPasteWriteRepository pasteWriteRepository, IMapper mapper, UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor, SignInManager<AppUser> signInManager)
         {
             _pasteWriteRepository = pasteWriteRepository;
             _mapper = mapper;
             _userManager = userManager;
             _contextAccessor = httpContextAccessor;
+            _signInManager = signInManager;
         }
 
         public async Task<CreatePasteCommandResponse> Handle(CreatePasteCommandRequest request, CancellationToken cancellationToken)
@@ -45,9 +47,9 @@ namespace Application.Features.Command.PasteCommand.CreatePasteCommand
             }
 
             string userId = _contextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
-
+           
             paste.AppUserId = userId!=null ? userId : Constants.ApplicationConstants.AnonymId;
-
+            
             var res = await _pasteWriteRepository.Add(paste);
             var result = _pasteWriteRepository.SaveAsync();
             if (res == false || result != 1)
@@ -57,5 +59,7 @@ namespace Application.Features.Command.PasteCommand.CreatePasteCommand
             response = _mapper.Map<CreatePasteCommandResponse>(paste);
             return response;
         }
+       
+
     }
 }

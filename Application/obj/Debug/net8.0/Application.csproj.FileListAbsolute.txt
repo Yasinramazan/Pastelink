@@ -15,3 +15,4 @@ C:\Users\yasin\source\repos\Pastelink\Application\bin\Debug\net8.0\Domain.pdb
 C:\Users\yasin\source\repos\Pastelink\Application\obj\Debug\net8.0\Applicat.44B5EDA2.Up2Date
 C:\Users\yasin\source\repos\Pastelink\Application\bin\Debug\net8.0\Persistance.dll
 C:\Users\yasin\source\repos\Pastelink\Application\bin\Debug\net8.0\Persistance.pdb
+C:\Users\yasin\source\repos\Pastelink\Application\obj\Debug\net8.0\Application.sourcelink.json

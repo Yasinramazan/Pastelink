@@ -20,8 +20,30 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using static Serilog.Sinks.MSSqlServer.ColumnOptions;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.DataProtection;
+using Persistance.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer("Admin",
+    options => options.TokenValidationParameters = new()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidAudience = builder.Configuration["Token:Audience"],
+        ValidIssuer = builder.Configuration["Token:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Token:IssuerSigningKey"])),
+        NameClaimType = ClaimTypes.Name,
+
+    }); ;
 
 // Add services to the container.
 builder.Services.AddPersistenceService();
@@ -51,23 +73,12 @@ Logger Log = new LoggerConfiguration().Enrich.FromLogContext().
 
 
 builder.Host.UseSerilog(Log);
-builder.Services.AddAuthorization(options => options.AddPolicy("AdminRequired", policy => policy.RequireRole("Admin")));
+//builder.Services.AddAuthorization(options => options.AddPolicy("AdminRequired", policy => policy.RequireRole("Admin")));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer("admin",
-    options => options.TokenValidationParameters = new()
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
 
-        ValidAudience = builder.Configuration["Token:Audience"],
-        ValidIssuer = builder.Configuration["Token:Issuer"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Token:IssuerSigningKey"])),
-        NameClaimType = ClaimTypes.Name,
-    }); ;
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -102,13 +113,6 @@ app.Use(async (context, next) =>
     }
     await next();
 });
-
-app.Use(async (context, next) =>
-{
-    var user = context.User?.Identity?.IsAuthenticated!=null||true?context.User.Identity:null;
-    await next();
-}
-);
 
 
 app.MapControllers();

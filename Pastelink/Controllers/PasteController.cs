@@ -14,7 +14,7 @@ namespace Pastelink.Controllers
     //[EnableCors("OpenCORSPolicy")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "AdminRequired")]
+    [Authorize(AuthenticationSchemes = "Admin")]
     public class PasteController : Controller
     {
         IMediator _mediator;
@@ -24,10 +24,11 @@ namespace Pastelink.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpPost("CreatePaste")]
         public async Task<IActionResult> CreatePaste(CreatePasteCommandRequest request)
         {
-
+            var t = User.Identity.Name;
             var response = _mediator.Send(request);
             return Ok(response);
         }

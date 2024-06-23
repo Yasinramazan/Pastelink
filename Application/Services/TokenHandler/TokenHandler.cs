@@ -37,8 +37,10 @@ namespace Application.Services.TokenHandler
                 signingCredentials:credentials,
                 claims: new List<Claim>
                 {
-                    new(ClaimTypes.Name,user.Email)
+                    new Claim(ClaimTypes.Name,user.Email),
+                    new Claim(ClaimTypes.NameIdentifier,user.Id),
                 }
+
                 );
 
             JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
