@@ -52,8 +52,7 @@ namespace Application.Features.Command.AppUserCommand.LoginUser
             if(result.Succeeded)
             {
                 Token token = _tokenHandler.CreateAccessToken(user);
-               
-                return new LoginUserResponse()
+               return new LoginUserResponse()
                 {
                     Id=user.Id,
                     Email=user.Email,
