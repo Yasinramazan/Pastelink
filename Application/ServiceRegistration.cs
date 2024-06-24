@@ -6,6 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Persistance.Abstractions.UserAbstractions;
+using Persistance.Concrete.Repositories.UserService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,7 @@ namespace Application
                 
             });
             services.AddScoped<ITokenHandler, TokenHandler>();
+            services.AddScoped<IUserService<AppUser>, UserManagerService<AppUser>>();
             return services;
 
         }

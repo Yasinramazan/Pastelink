@@ -21,7 +21,8 @@ namespace Persistance.Concrete.Repositories
 
         public async Task<T> GetById(string id)
         {
-            return await Table().FirstOrDefaultAsync(x=>x.Id.ToString()==id);
+            
+            return await Table().FindAsync(Guid.Parse(id));
         }
 
         public IEnumerable<T> GetAll()

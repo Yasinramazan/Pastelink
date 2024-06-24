@@ -1,0 +1,10 @@
+UserManager
+-FindByIdAsync(request.Id)
+-SetLockoutEnabledAsync(user, true)
+-ChangePasswordAsync(user, request.Password, request.NewPassword)
+-CreateAsync(user,request.Password);
+-FindByEmailAsync(request.Email);
+SýgnInManager
+-SignOutAsync();
+-PasswordSignInAsync()
+IHttpContextAccessor

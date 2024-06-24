@@ -8,20 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Application.Services.ApplicationExceptions;
-
-
+using Persistance.Abstractions.UserAbstractions;
 
 namespace Application.Features.Command.AppUserCommand.CreateAppUser
 {
     public class CreateAppUserHandler: IRequestHandler<CreateAppUserRequest, CreateAppUserResponse>
     {
-        readonly UserManager<AppUser> _userManager;
+        private readonly IUserService<AppUser> _userService;
         private readonly IMapper _mapper;
 
-        public CreateAppUserHandler(IMapper mapper, UserManager<AppUser> userManager)
+        public CreateAppUserHandler(IMapper mapper, IUserService<AppUser> userService)
         {
             _mapper = mapper;
-            _userManager = userManager;
+            _userService = userService;
         }
 
         public async Task<CreateAppUserResponse> Handle(CreateAppUserRequest request, CancellationToken cancellationToken)
@@ -30,7 +29,7 @@ namespace Application.Features.Command.AppUserCommand.CreateAppUser
 
 
             
-            IdentityResult result =  await _userManager.CreateAsync(user,request.Password);
+            IdentityResult result =  await _userService.CreateAsync(user,request.Password);
             CreateAppUserResponse response = new CreateAppUserResponse();
             
             if (result.Succeeded)
