@@ -21,17 +21,17 @@ namespace Application.Features.Command.PasteCommand.CreatePasteCommand
     public class CreatePasteCommandHandler : IRequestHandler<CreatePasteCommandRequest, CreatePasteCommandResponse>
     {
         private readonly IHttpContextAccessor _contextAccessor;
-        UserManager<AppUser> _userManager;
-        private SignInManager<AppUser> _signInManager;
+        
         IPasteWriteRepository _pasteWriteRepository;
         IMapper _mapper;
-        public CreatePasteCommandHandler(IPasteWriteRepository pasteWriteRepository, IMapper mapper, UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor, SignInManager<AppUser> signInManager)
+        public CreatePasteCommandHandler(IPasteWriteRepository pasteWriteRepository, IMapper mapper,IHttpContextAccessor httpContextAccessor)
         {
             _pasteWriteRepository = pasteWriteRepository;
             _mapper = mapper;
-            _userManager = userManager;
+            
             _contextAccessor = httpContextAccessor;
-            _signInManager = signInManager;
+            
+
         }
 
         public async Task<CreatePasteCommandResponse> Handle(CreatePasteCommandRequest request, CancellationToken cancellationToken)

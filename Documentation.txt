@@ -1,0 +1,5 @@
+
+UserManager
+	Ban User
+		FindByIdAsync(request.Id);
+		SetLockoutEnabledAsync(user, true);

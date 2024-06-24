@@ -1,4 +1,4 @@
-﻿using Application.Services.ApplicationExceptions;
+﻿using Persistance.Abstractions.UserAbstractions;
 using AutoMapper;
 using Azure;
 using Domain.Entities;
@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Services.ApplicationExceptions;
 
 namespace Application.Features.Command.PasteCommand.UpdatePasteCommand
 {
@@ -32,18 +33,18 @@ namespace Application.Features.Command.PasteCommand.UpdatePasteCommand
         public async Task<UpdatePasteCommandResponse> Handle(UpdatePasteCommandRequest request, CancellationToken cancellationToken)
         {
             UpdatePasteCommandResponse response= new UpdatePasteCommandResponse();
-            Paste paste = _pasteRepository.GetWhere(x => x.Id.ToString() == request.Id).FirstOrDefault<Paste>(x => x.Id.ToString() == request.Id);
+            Paste paste = await _pasteRepository.GetById(request.Id);
             
             if(paste is null)
             {
                 throw new PasteException(PasteExceptions.PasteNoFound);
             }
-               
-            string AppUserId = paste.AppUserId;
+
+            string UserId = paste.AppUserId;
             DateTime CreatedTime = paste.CreatedTime;
             paste = _mapper.Map<Paste>(request);
-            paste.AppUserId = AppUserId;
             paste.CreatedTime = CreatedTime;
+            paste.AppUserId = UserId;
 
             var result = await _pasteWriteRepository.Update(paste);
             var saveResult = _pasteWriteRepository.SaveAsync();

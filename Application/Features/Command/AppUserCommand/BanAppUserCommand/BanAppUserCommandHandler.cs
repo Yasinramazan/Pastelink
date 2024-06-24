@@ -1,8 +1,10 @@
-﻿using Application.Services.ApplicationExceptions;
+﻿
+using Application.Services.ApplicationExceptions;
 using Domain.Entities.Identity;
 using Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Persistance.Abstractions.UserAbstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +15,23 @@ namespace Application.Features.Command.AppUserCommand.BanAppUserCommand
 {
     public class BanAppUserCommandHandler : IRequestHandler<BanAppUserCommandRequest, BanAppUserCommandResponse>
     {
-        private UserManager<AppUser> _userManager;
+        private readonly IUserService<AppUser> _userService;
 
-        public BanAppUserCommandHandler(UserManager<AppUser> userManager)
+        public BanAppUserCommandHandler(IUserService<AppUser> userService)
         {
-            _userManager = userManager;
+            _userService = userService;
         }
 
         public async Task<BanAppUserCommandResponse> Handle(BanAppUserCommandRequest request, CancellationToken cancellationToken)
         {
-            AppUser user = await _userManager.FindByIdAsync(request.Id);
+            AppUser user = await _userService.FindByIdAsync(request.Id);
 
             if (user == null)
             {
                 throw new UserException(UserExceptions.UserNotFound);
             }
 
-            var result = await _userManager.SetLockoutEnabledAsync(user, true);
+            var result = await _userService.SetLockoutEnabledAsync(user, true);
 
             if(result.Succeeded)
             {

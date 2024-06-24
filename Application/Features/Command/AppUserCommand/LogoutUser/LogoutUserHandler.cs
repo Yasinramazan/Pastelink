@@ -1,7 +1,9 @@
-﻿using Application.Features.Command.AppUserCommand.LogOutUser;
+﻿
+using Application.Features.Command.AppUserCommand.LogOutUser;
 using Domain.Entities.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Persistance.Abstractions.UserAbstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +14,11 @@ namespace Application.Features.Command.AppUserCommand.LogoutUser
 {
     public class LogoutUserHandler : IRequestHandler<LogoutUserRequest, LogoutUserResponse>
     {
-        private UserManager<AppUser> _userManager;
-        private SignInManager<AppUser> _signInManager;
+        private readonly IUserService<AppUser> _userService;
 
-        public LogoutUserHandler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public LogoutUserHandler(IUserService<AppUser> userService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _userService = userService;
         }
 
         public async Task<LogoutUserResponse> Handle(LogoutUserRequest request, CancellationToken cancellationToken)
@@ -26,7 +26,7 @@ namespace Application.Features.Command.AppUserCommand.LogoutUser
             LogoutUserResponse response = new();
             try
             {
-                await _signInManager.SignOutAsync();
+                _userService.SignOut();
                 response.Message = "Başarılı";
             }
             catch (Exception)

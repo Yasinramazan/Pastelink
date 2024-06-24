@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Persistance.Abstractions.UserAbstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,33 +22,29 @@ namespace Application.Features.Command.AppUserCommand.LoginUser
 {
     public class LoginUserHandler : IRequestHandler<LoginUserRequest, LoginUserResponse>
     {
-        private IHttpContextAccessor _httpContextAccessor;
-        private UserManager<AppUser> _userManager;
-        private SignInManager<AppUser> _signInManager;
         
-
+        private readonly IUserService<AppUser> _userService;
         private readonly IMapper _mapper;
         private ITokenHandler _tokenHandler;
 
-        public LoginUserHandler(UserManager<AppUser> userManager, IMapper mapper, ITokenHandler tokenHandler, SignInManager<AppUser> signInManager, IHttpContextAccessor httpContextAccessor)
+        public LoginUserHandler(IMapper mapper, ITokenHandler tokenHandler, IUserService<AppUser> userService)
         {
-            _userManager = userManager;
+
             _mapper = mapper;
             _tokenHandler = tokenHandler;
-            _signInManager = signInManager;
-            _httpContextAccessor = httpContextAccessor;
+            _userService = userService;
         }
 
         public async Task<LoginUserResponse> Handle(LoginUserRequest request, CancellationToken cancellationToken)
         {
 
-            var user =await _userManager.FindByEmailAsync(request.Email);
+            var user =await _userService.FindByEmailAsync(request.Email);
             
             if(user==null)
             {
                 throw new UserException(UserExceptions.UserNotFound);
             }
-            SignInResult result = await _signInManager.PasswordSignInAsync(user,request.Password,false,false);
+            SignInResult result = await _userService.PasswordSignInAsync(user,request.Password,false,false);
 
             if(result.Succeeded)
             {
