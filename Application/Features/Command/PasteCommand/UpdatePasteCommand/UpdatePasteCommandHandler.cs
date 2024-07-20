@@ -16,7 +16,7 @@ using Application.Services.ApplicationExceptions;
 namespace Application.Features.Command.PasteCommand.UpdatePasteCommand
 {
     public class UpdatePasteCommandHandler : IRequestHandler<UpdatePasteCommandRequest, UpdatePasteCommandResponse>
-    {
+    {   //Deneme Commit icin
         private readonly IPasteReadRepository _pasteRepository;
         private IPasteWriteRepository _pasteWriteRepository;
         private readonly IMapper _mapper;
